@@ -3,15 +3,17 @@
         {
             "name": "STM32",
             "includePath": [
-                "${workspaceFolder}/**"            
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "STM32F103xB"
             ],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "gcc-arm"
+            "intelliSenseMode": "gcc-arm",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

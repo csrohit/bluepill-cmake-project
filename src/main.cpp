@@ -11,7 +11,7 @@ int main(void)
 	Led led(GPIOC, 13);
 	while (1)
 	{
-		led.blink(1000);
+		led.blink(500);
 	}
 	for (;;)
 		;

@@ -85,11 +85,17 @@ target_link_options(${EXECUTABLE} PRIVATE
 add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${EXECUTABLE}>
     COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.hex
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin
-    COMMAND echo "Hello rohit")
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE}> ${EXECUTABLE}.bin)
     
 
 if (${DUMP_ASM})
     add_custom_command(TARGET ${EXECUTABLE} POST_BUILD
         COMMAND ${CMAKE_OBJDUMP} -D $<TARGET_FILE:${EXECUTABLE}> > ${EXECUTABLE}.s)
 endif()
+
+add_custom_target(flash
+    COMMAND openocd -d2 -f interface/stlink.cfg -c \"transport select hla_swd\" -f target/stm32f1x.cfg -c \"program {${EXECUTABLE}.elf} verify reset\; shutdown\;\"
+)
+
+
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
