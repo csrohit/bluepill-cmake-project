@@ -67,10 +67,7 @@ All the configuration required for building this project is given below.
     In `CMakeLists.txt`, output binary name can be configured using `project(<binary-name>)` macro.
     ** update above info in `.vscode/launch.json` as well for debugging to work.
 
-
-
-##Build
-
+## Build
 
 Run following command in terminal to generate flashable binaries for blue pill board. Build files will be written to **Build Output Directory** as configured.
 
@@ -80,21 +77,20 @@ make all
 
 ## Flash
 
-
 1. Connect Stlink to PC and blue pill board using swd headers.
-2. Put blue pill board in programming mode
+2. Put blue pill board in programming mode.
+3. Run following to flash board with binary.
 
-    ```bash
-    make flash
-    ```
-
+```bash
+make flash
+```
 
 ## Output
 
 Onboard led connected to Pin C13 can be observed to be blinking after 500ms.
 
 ## Debug
-Click in `Run and Debug` option in VsCode sidebar. Then launch `Cortex Debug` target.
 
+Click in `Run and Debug` option in VsCode sidebar. Then launch `Cortex Debug` target.
 
 Happy debugging....
