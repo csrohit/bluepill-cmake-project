@@ -11,8 +11,17 @@ int main(void)
 	Led led(GPIOC, 13);
 	while (1)
 	{
-		led.blink(500);
+		led.toggle();
+		ms_delay(500);
 	}
-	for (;;)
-		;
+}
+
+extern "C" void ms_delay(int ms)
+{
+    while (ms-- > 0)
+    {
+        volatile int x = 1000;
+        while (x-- > 0)
+            __asm("nop");
+    }
 }

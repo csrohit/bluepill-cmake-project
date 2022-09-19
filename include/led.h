@@ -10,9 +10,31 @@ private:
     GPIO_TypeDef * PORT;
 
 public:
+    /**
+     * @brief Construct a new Led object
+     * 
+     * @param PORT_NAME POinter to port base address
+     * @param pin_no pin number
+     */
     Led(GPIO_TypeDef * PORT_NAME, uint16_t pin_no);
+
     ~Led();
+
+    /**
+     * @brief Turn on led
+     * 
+     */
     void on();
+
+    /**
+     * @brief Turn off led
+     * 
+     */
     void off();
-    void blink(uint16_t delay);
+
+    /**
+     * @brief Toggle led
+     * 
+     */
+    void toggle();
 };
