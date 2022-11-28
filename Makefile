@@ -5,6 +5,8 @@ BUILD_TYPE ?= Release
 
 all: build
 
+tt:${BUILD_DIR}/Makefile
+
 ${BUILD_DIR}/Makefile:
 	cmake \
 		-B${BUILD_DIR} \
@@ -18,11 +20,7 @@ cmake: ${BUILD_DIR}/Makefile
 build: cmake
 	$(MAKE) -C ${BUILD_DIR} --no-print-directory
 
-flash:
-	$(MAKE) -C ${BUILD_DIR} flash --no-print-directory
-
 SRCS := $(shell find . -name '*.[ch]' -or -name '*.[ch]pp')
-
 
 clean:
 	rm -rf $(BUILD_DIR)

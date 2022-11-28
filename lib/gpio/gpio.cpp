@@ -1,8 +1,9 @@
 /**
  ******************************************************************************
- * @file           : main.cpp
+ * @file           : gpio.cpp
  * @author         : Rohit Nimkar <nehalnimkar@gmail.com> <https://csrohit.github.io>
- * @brief          : Main program body
+ * @brief          : GPIO library source code
+ *                   This source file contains definitions of non-inline functions
  ******************************************************************************
  * @attention
  *
@@ -14,44 +15,5 @@
  ******************************************************************************
  */
 
-#include <stm32f1xx.h>
-#include <stdint.h>
 #include <gpio.hpp>
-
-volatile uint32_t msTicks = 0;
-extern "C"
-{
-	void SysTick_Handler(void)
-	{
-		msTicks++;
-	}
-}
-
-/**
- * @brief Add blocking delay
- *
- * @param ms delay in milliseconds
- */
-void delay(int ms)
-{
-	uint32_t expected_ticks = msTicks + ms;
-	while (msTicks < expected_ticks)
-	{
-		__asm("nop");
-	}
-}
-
-int main(void)
-{
-	int returnCode;
-
-	returnCode = SysTick_Config(SystemCoreClock / 1000);
-
-	GPIO::enable_PortC();
-	GPIO led(GPIOC, GPIO::PIN_13);
-	while (1)
-	{
-		led.toggle();
-		delay(1000);
-	}
-}
+#include <stm32f1xx.h>
